@@ -19,6 +19,17 @@ score_requirement = 50
 initial_games = 1000
 
 
+def throws(error, message):
+    def inner(f):
+        def wrapper(*args, **kwargs):
+            try:
+                return f(*args, **kwargs)
+            except error:
+                print(message)
+        return wrapper
+    return inner
+
+
 def init_rand_games():
     ''' Renders the game for 5 games using random actions '''
     for _ in range(5):
@@ -76,6 +87,10 @@ def initial_population():
     return training_data
 
 
+@throws(
+    statistics.StatisticsError,
+    'could not print out statis since' +
+    ' there are nothing in the accepted scores')
 def new_population(model):
     training_data = []
     scores = []
@@ -118,12 +133,8 @@ def new_population(model):
 
     training_data_save = np.array(training_data)
     np.save('saved_data.npy', training_data_save)
-
-    try:
-        print('average accepted score:', mean(accepted_scores))
-        print('Median score for accepted scores:', median(accepted_scores))
-    except statistics.StatisticsError:
-        print('no accepted scores, unable to print out stats')
+    print('average accepted score:', mean(accepted_scores))
+    print('Median score for accepted scores:', median(accepted_scores))
 
     print(Counter(accepted_scores))
     return training_data
