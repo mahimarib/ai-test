@@ -89,7 +89,7 @@ def initial_population():
 
 @throws(
     statistics.StatisticsError,
-    'could not print out statis since' +
+    'could not print out stats since' +
     ' there are nothing in the accepted scores')
 def new_population(model):
     training_data = []
