@@ -28,7 +28,10 @@ MANIFEST
 
 # tensor flow
 
-*.models.*
+checkpoint
+*.meta
+*.index
+*.data
 log
 
 # PyInstaller
