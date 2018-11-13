@@ -106,10 +106,9 @@ def new_population(model):
                 action = random.randrange(0, 2)
             else:
                 game_memory.append([prev_observation, action])
-                action = np.argmax(
-                    model.predict(
-                        np.array(prev_observation).reshape(
-                            -1, len(prev_observation)))[0])
+                action = np.argmax(model.predict(
+                    np.array(prev_observation).reshape(
+                        -1, len(prev_observation)))[0])
 
             obvservation, reward, done, info = env.step(action)
             prev_observation = obvservation
@@ -201,10 +200,9 @@ for each_game in range(10):
         if len(prev_observation) == 0:
             action = random.randrange(0, 2)
         else:
-            action = np.argmax(
-                model1.predict(
-                    np.array(prev_observation).reshape(
-                        -1, len(prev_observation)))[0])
+            action = np.argmax(model1.predict(
+                np.array(prev_observation).reshape(
+                    -1, len(prev_observation)))[0])
 
         choices.append(action)
 
